@@ -24,8 +24,12 @@ def create(request):
         return redirect('home')
 
 
-
-def view(request,pk):
+def view(request, pk):
     data = {}
     data['db'] = Clientes.objects.get(pk=pk)
-    return render(request,'view.html',data)
+    return render(request, 'view.html', data)
+
+def delete(request, pk):
+    db = Clientes.objects.get(pk=pk)
+    db.delete()
+    return redirect('home')
