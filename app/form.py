@@ -1,8 +1,8 @@
 from django.forms import ModelForm
-from app.models import Clientes
+from app.models import Atleta
 
 # Create the form class.
-class ClientesForm(ModelForm):
+class AtletasForm(ModelForm):
      class Meta:
-        model = Clientes
-        fields = ['Nome', 'Cpf', 'DataNascimento']
+        model = Atleta
+        fields = ['Nome', 'Idade', 'Selecao']

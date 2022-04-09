@@ -1,24 +1,24 @@
 from django.shortcuts import redirect, render
-from app.form import ClientesForm
-from app.models import Clientes
+from app.form import AtletasForm
+from app.models import Atleta
 
 # Create your views here.
 
 
 def home(request):
     data = {}
-    data['db'] = Clientes.objects.all()
+    data['db'] = Atleta.objects.all()
     return render(request, 'index.html', data)
 
 
 def form(request):
     data = {}
-    data['form'] = ClientesForm()
+    data['form'] = AtletasForm()
     return render(request, 'formulario.html', data)
 
 
 def create(request):
-    form = ClientesForm(request.POST or None)
+    form = AtletasForm(request.POST or None)
     if form.is_valid():
         form.save()
         return redirect('home')
@@ -26,27 +26,27 @@ def create(request):
 
 def view(request, pk):
     data = {}
-    data['db'] = Clientes.objects.get(pk=pk)
+    data['db'] = Atleta.objects.get(pk=pk)
     return render(request, 'view.html', data)
 
 
 def edit(request, pk):
     data = {}
-    data['db'] = Clientes.objects.get(pk=pk)
-    data['form'] = ClientesForm(instance=data['db'])
+    data['db'] = Atleta.objects.get(pk=pk)
+    data['form'] = AtletasForm(instance=data['db'])
     return render(request, 'formulario.html', data)
 
 
 def update(request, pk):
     data = {}
-    data['db'] = Clientes.objects.get(pk=pk)
-    form = ClientesForm(request.POST or None, instance=data['db'])
+    data['db'] = Atleta.objects.get(pk=pk)
+    form = AtletasForm(request.POST or None, instance=data['db'])
     if form.is_valid():
         form.save()
         return redirect('home')
 
 
 def delete(request, pk):
-    db = Clientes.objects.get(pk=pk)
+    db = Atleta.objects.get(pk=pk)
     db.delete()
     return redirect('home')
